@@ -17,7 +17,10 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit(): void {
+  track: any;
+
+
+  async ngOnInit(): Promise<void> {
     this.authService.handleCallback().then(success => {
       if (success) {
         this.router.navigateByUrl('/');
@@ -25,6 +28,14 @@ export class LoginComponent implements OnInit {
         console.error('Login falhou');
       }
     });
+
+    if (!!sessionStorage.getItem('access_token')) {
+      var token = sessionStorage.getItem('access_token');
+
+      this.service.setToken(token!);
+
+      await this.setTrack();
+    }
   }
 
   login() {
@@ -37,21 +48,21 @@ export class LoginComponent implements OnInit {
     this.router.navigateByUrl('/')
   }
 
-  next() {
-    if (!!sessionStorage.getItem('access_token')) {
-      var token = sessionStorage.getItem('access_token');
+  async next() {
+    this.service.next();
 
-      this.service.setToken(token!);
-      this.service.next();
-    }
+    await this.setTrack();
   }
 
-  prev() {
-    if (!!sessionStorage.getItem('access_token')) {
-      var token = sessionStorage.getItem('access_token');
+  async prev() {
+    this.service.prev();
 
-      this.service.setToken(token!);
-      this.service.prev();
-    }
+    await this.setTrack();
+  }
+
+  async setTrack() {
+    var res = await this.service.track();
+
+    this.track = res.item!.name;
   }
 }

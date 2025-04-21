@@ -23,4 +23,8 @@ export class SpotifyService {
   next() {
     this.api.skipToNext();
   }
+
+  async track() {
+    return await this.api.getMyCurrentPlayingTrack();
+  }
 }

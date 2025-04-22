@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   track: any;
 
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit() {
     this.authService.handleCallback().then(success => {
       if (success) {
         this.router.navigateByUrl('/');
@@ -33,8 +33,6 @@ export class LoginComponent implements OnInit {
       var token = sessionStorage.getItem('access_token');
 
       this.service.setToken(token!);
-
-      await this.setTrack();
     }
   }
 
@@ -48,21 +46,18 @@ export class LoginComponent implements OnInit {
     this.router.navigateByUrl('/')
   }
 
-  async next() {
-    this.service.next();
-
-    await this.setTrack();
+  next() {
+    this.service.next()
+      .then(() => { this.setTrack() });
   }
 
-  async prev() {
-    this.service.prev();
-
-    await this.setTrack();
+  prev() {
+    this.service.prev()
+      .then(() => { this.setTrack() });
   }
 
-  async setTrack() {
-    var res = await this.service.track();
-
-    this.track = res.item!.name;
+  setTrack() {
+    this.service.track()
+      .then((res) => this.track = res.item.name);
   }
 }

@@ -17,14 +17,14 @@ export class SpotifyService {
   }
 
   prev() {
-    this.api.skipToPrevious();
+    return this.api.skipToPrevious();
   }
 
   next() {
-    this.api.skipToNext();
+    return this.api.skipToNext();
   }
 
-  async track() {
-    return await this.api.getMyCurrentPlayingTrack();
+  track() {
+    return this.api.getMyCurrentPlayingTrack();
   }
 }

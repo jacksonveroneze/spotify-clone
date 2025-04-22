@@ -8,14 +8,13 @@ export const spotifyAuthConfig: AuthConfig = {
     loginUrl: 'https://accounts.spotify.com/authorize',
     tokenEndpoint: 'https://accounts.spotify.com/api/token',
     clientId: '0da67ee923854ec9b4aa6fcf06f1cd6b',
-    redirectUri: 'http://127.0.0.1:4200/login/',
+    redirectUri: `${window.location.origin}/login`,
     responseType: 'code',
-    // 👇 Flags que evitam OIDC
     requireHttps: true,
     skipIssuerCheck: true,
     disableAtHashCheck: true,
     requestAccessToken: true,
-    oidc: false, // <---------------------- ESSENCIAL
+    oidc: false,
     silentRefreshRedirectUri: '',
     scope: [
         'user-read-private',

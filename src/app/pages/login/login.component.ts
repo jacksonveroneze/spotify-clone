@@ -6,7 +6,6 @@ import { SpotifyAuthService } from '../../services/spotify-auth.service';
 @Component({
   selector: 'app-login',
   standalone: false,
-  // imports: [],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -17,17 +16,15 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) { }
 
-  track: any;
-
-
-  ngOnInit() {
-    this.authService.handleCallback().then(success => {
-      if (success) {
-        this.router.navigateByUrl('/');
-      } else {
-        console.error('Login falhou');
-      }
-    });
+  ngOnInit(): void {
+    this.authService.handleCallback()
+      .then(success => {
+        if (success) {
+          this.router.navigateByUrl('/');
+        } else {
+          console.error('Login falhou');
+        }
+      });
 
     if (!!sessionStorage.getItem('access_token')) {
       var token = sessionStorage.getItem('access_token');
@@ -36,28 +33,13 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  login() {
+  login(): void {
     this.authService.login();
   }
 
-  logout() {
+  logout(): void {
     this.authService.logout();
 
     this.router.navigateByUrl('/')
-  }
-
-  next() {
-    this.service.next()
-      .then(() => { this.setTrack() });
-  }
-
-  prev() {
-    this.service.prev()
-      .then(() => { this.setTrack() });
-  }
-
-  setTrack() {
-    this.service.track()
-      .then((res) => this.track = res.item.name);
   }
 }

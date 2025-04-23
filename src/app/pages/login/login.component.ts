@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SpotifyService } from '../../services/spotify.service';
 import { Router } from '@angular/router';
 import { SpotifyAuthService } from '../../services/spotify-auth.service';
 
@@ -12,7 +11,6 @@ import { SpotifyAuthService } from '../../services/spotify-auth.service';
 export class LoginComponent implements OnInit {
   constructor(
     private authService: SpotifyAuthService,
-    private service: SpotifyService,
     private router: Router
   ) { }
 
@@ -25,21 +23,9 @@ export class LoginComponent implements OnInit {
           console.error('Login falhou');
         }
       });
-
-    if (!!sessionStorage.getItem('access_token')) {
-      var token = sessionStorage.getItem('access_token');
-
-      this.service.setToken(token!);
-    }
   }
 
   login(): void {
     this.authService.login();
-  }
-
-  logout(): void {
-    this.authService.logout();
-
-    this.router.navigateByUrl('/')
   }
 }

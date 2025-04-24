@@ -2,11 +2,12 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-botao-menu',
-  imports: [],
+  // imports: [],
+  standalone: false,
   templateUrl: './botao-menu.component.html',
   styleUrl: './botao-menu.component.scss'
 })
-export class BotaoMenuComponent implements OnInit {
+export class BotaoMenuComponent {
 
   @Input()
   descricao: string = ''
@@ -19,10 +20,7 @@ export class BotaoMenuComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void { }
-
   onClick(): void {
     this.click.emit();
   }
-
 }

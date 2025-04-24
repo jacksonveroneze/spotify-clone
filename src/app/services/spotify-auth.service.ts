@@ -11,8 +11,8 @@ export class SpotifyAuthService {
     this.oauthService.configure(spotifyAuthConfig);
   }
 
-  login(): void {
-    this.oauthService.initCodeFlow();
+  async login(): Promise<void> {
+    return await this.oauthService.initCodeFlow();
   }
 
   async handleCallback(): Promise<boolean> {

@@ -8,7 +8,7 @@ export const spotifyAuthConfig: AuthConfig = {
     loginUrl: 'https://accounts.spotify.com/authorize',
     tokenEndpoint: 'https://accounts.spotify.com/api/token',
     clientId: '0da67ee923854ec9b4aa6fcf06f1cd6b',
-    redirectUri: `${window.location.origin}/login`,
+    redirectUri: `${window.location.origin}/login/`,
     responseType: 'code',
     requireHttps: true,
     skipIssuerCheck: true,

@@ -18,14 +18,16 @@ export class LoginComponent implements OnInit {
     this.authService.handleCallback()
       .then(success => {
         if (success) {
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/player');
         } else {
           console.error('Login falhou');
         }
       });
   }
 
-  login(): void {
-    this.authService.login();
+  async login(): Promise<void> {
+    await this.authService.login();
+
+    //this.router.navigate(['player']);
   }
 }

@@ -10,10 +10,6 @@ import { RodapeUsuarioComponent } from "../../components/rodape-usuario/rodape-u
 
 @NgModule({
   declarations: [
-    PlayerComponent,
-    PainelEsquerdoComponent,
-    BotaoMenuComponent,
-    RodapeUsuarioComponent
   ],
   imports: [
     CommonModule,

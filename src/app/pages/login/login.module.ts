@@ -6,7 +6,6 @@ import { loginRoutes } from './login.routes';
 
 @NgModule({
   declarations: [
-    LoginComponent
   ],
   imports: [
     CommonModule,

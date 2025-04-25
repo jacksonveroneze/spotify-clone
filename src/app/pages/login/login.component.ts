@@ -4,7 +4,7 @@ import { SpotifyAuthService } from '../../services/spotify-auth.service';
 
 @Component({
   selector: 'app-login',
-  standalone: false,
+  standalone: true,
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

@@ -5,12 +5,15 @@ import { IPlaylist } from '../../interfaces/IPlaylist';
 import { SpotifyService } from '../../services/spotify.service';
 import { IBotao } from '../../interfaces/IBotao';
 import { Router } from '@angular/router';
+import { RodapeUsuarioComponent } from "../rodape-usuario/rodape-usuario.component";
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-painel-esquerdo',
-  standalone: false,
+  standalone: true,
   templateUrl: './painel-esquerdo.component.html',
-  styleUrl: './painel-esquerdo.component.scss'
+  styleUrl: './painel-esquerdo.component.scss',
+  imports: [BotaoMenuComponent, RodapeUsuarioComponent, FaIconComponent]
 })
 export class PainelEsquerdoComponent implements OnInit {
 

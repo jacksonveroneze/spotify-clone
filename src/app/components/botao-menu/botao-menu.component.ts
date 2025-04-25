@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 @Component({
   selector: 'app-botao-menu',
   // imports: [],
-  standalone: false,
+  standalone: true,
   templateUrl: './botao-menu.component.html',
   styleUrl: './botao-menu.component.scss'
 })

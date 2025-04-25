@@ -1,4 +1,4 @@
-@import 'variaveis';
+@use 'variaveis' as *;
 
 :host {
   background-color: #222;

@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { IUsuario } from '../../interfaces/IUsuario';
-import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { SpotifyService } from '../../services/spotify.service';
 import { Router } from '@angular/router';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 
 @Component({
   selector: 'app-rodape-usuario',
-  standalone: false,
+  standalone: true,
+  imports: [FaIconComponent],
   templateUrl: './rodape-usuario.component.html',
   styleUrl: './rodape-usuario.component.scss'
 })

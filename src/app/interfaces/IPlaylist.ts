@@ -1,4 +1,4 @@
-import { IMusica } from "./IMusica"
+import { IMusica } from "./IMusica";
 
 export interface IPlaylist {
     id: string,

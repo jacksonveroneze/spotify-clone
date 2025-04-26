@@ -1,5 +1,5 @@
 import { CanActivateFn } from '@angular/router';
 
-export const isAuthenticated: CanActivateFn = (route, state) => {
+export const isAuthenticated: CanActivateFn = () => {
   return true;
 };

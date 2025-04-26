@@ -6,7 +6,7 @@
     <div class="menu-container flex opcoes">
         @for(item of botoes; track $index)
         {
-        <app-botao-menu [descricao]="item.descricao" [selecionado]="item.selecionado" (click)="botaoClick(item)">
+        <app-botao-menu [descricao]="item.descricao" [selecionado]="item.selecionado" (clickButton)="botaoClick(item)">
             <fa-icon [icon]="item.icone"></fa-icon>
         </app-botao-menu>
         }

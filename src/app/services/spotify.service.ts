@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import Spotify from 'spotify-web-api-js'
+import Spotify from 'spotify-web-api-js';
 import { IUsuario } from '../interfaces/IUsuario';
 import { IPlaylist } from '../interfaces/IPlaylist';
 
@@ -17,13 +17,13 @@ export class SpotifyService {
   }
 
   async getUsuario(): Promise<IUsuario> {
-    var user = await this.api.getMe();
+    const user = await this.api.getMe();
 
     return {
       id: user.id,
       nome: user.display_name,
       imagemUrl: user.images[0].url
-    }
+    };
   }
 
   setToken(token?: string) {

@@ -1,1 +1,15 @@
-<p>top-artista works!</p>
+<div class="card p-20">
+    @if (!isBusy) {
+    <div class="artista flex">
+        <span class="titulo-bg">
+            {{topArtista.nome}}
+        </span>
+    </div>
+
+    <div class="image" [style.background-image]="'url(' + topArtista.imagemUrl + ')'">
+
+    </div>
+    }
+
+    <app-loading [isBusy]="isBusy"></app-loading>
+</div>

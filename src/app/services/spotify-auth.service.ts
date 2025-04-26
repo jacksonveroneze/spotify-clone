@@ -5,18 +5,19 @@ import { OAuthService } from 'angular-oauth2-oidc';
 @Injectable({
   providedIn: 'root'
 })
-export class SpotifyAuthService {
+export class AuthenticateService {
 
   constructor(private oauthService: OAuthService) {
     this.oauthService.configure(spotifyAuthConfig);
   }
 
-  async login(): Promise<void> {
-    return await this.oauthService.initCodeFlow();
+  login(): void {
+    return this.oauthService.initLoginFlow();
   }
 
   async handleCallback(): Promise<boolean> {
     await this.oauthService.tryLoginCodeFlow();
+    
     return this.oauthService.hasValidAccessToken();
   }
 

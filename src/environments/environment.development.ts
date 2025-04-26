@@ -15,7 +15,9 @@ export const spotifyAuthConfig: AuthConfig = {
     disableAtHashCheck: true,
     requestAccessToken: true,
     oidc: false,
+    disablePKCE: false,
     silentRefreshRedirectUri: '',
+    showDebugInformation: true,
     scope: [
         'user-read-private',
         'user-read-email',

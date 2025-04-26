@@ -1,5 +1,13 @@
 <div class="flex">
+    <app-loading [isBusy]="isBusy"></app-loading>
+
+    @if (!isBusy) {
     <img [src]="usuario.imagemUrl" alt="" srcset="">
     <span>{{usuario.nome}}</span>
     <fa-icon class="icone" (click)="logout()" [icon]="sairIcone"></fa-icon>
+    }
+
+    @if (!isBusy && !usuario) {
+    <span>Falha ao carregar dados do usuário. <a routerLink="/login">Tentar novamente</a></span>
+    }
 </div>

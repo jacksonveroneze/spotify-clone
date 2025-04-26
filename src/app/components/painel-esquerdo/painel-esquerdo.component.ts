@@ -57,6 +57,6 @@ export class PainelEsquerdoComponent implements OnInit {
         this.botoes[index].id == botao.id;
     }
 
-    this.router.navigate(['player']);
+    this.router.navigateByUrl('player/home');
   }
 }

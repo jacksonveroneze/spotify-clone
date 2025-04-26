@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SpotifyAuthService } from '../../services/spotify-auth.service';
+import { AuthenticateService } from '../../services/spotify-auth.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +10,7 @@ import { SpotifyAuthService } from '../../services/spotify-auth.service';
 })
 export class LoginComponent implements OnInit {
   constructor(
-    private authService: SpotifyAuthService,
+    private authService: AuthenticateService,
     private router: Router
   ) { }
 
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
     this.authService.handleCallback()
       .then(success => {
         if (success) {
-          this.router.navigateByUrl('/player');
+          this.router.navigateByUrl('/player/home');
         } else {
           console.error('Login falhou');
         }
@@ -27,7 +27,5 @@ export class LoginComponent implements OnInit {
 
   async login(): Promise<void> {
     await this.authService.login();
-
-    //this.router.navigate(['player']);
   }
 }

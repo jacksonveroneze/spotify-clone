@@ -4,6 +4,8 @@ export const environment = {
     production: true
 };
 
+export const pollingMusicaAtual: number = 5000;
+
 export const spotifyAuthConfig: AuthConfig = {
     loginUrl: 'https://accounts.spotify.com/authorize',
     tokenEndpoint: 'https://accounts.spotify.com/api/token',

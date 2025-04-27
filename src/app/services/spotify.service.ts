@@ -1,12 +1,17 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import Spotify from 'spotify-web-api-js';
-import { IUsuario } from '../interfaces/IUsuario';
-import { IPlaylist } from '../interfaces/IPlaylist';
-import { AuthenticateService } from './spotify-auth.service';
-import { IArtista } from '../interfaces/IArtista';
-import { SpotifyArtistaParaArtista, SpotifyPlaylistParaPlaylist, SpotifyTrackParaMusica, SpotifyUsuarioParaUsuario } from '../Common/mappers';
-import { newArtista } from '../Common/factories';
-import { IMusica } from '../interfaces/IMusica';
+import {IUsuario} from '../interfaces/IUsuario';
+import {IPlaylist} from '../interfaces/IPlaylist';
+import {AuthenticateService} from './spotify-auth.service';
+import {IArtista} from '../interfaces/IArtista';
+import {
+  SpotifyArtistaParaArtista,
+  SpotifyPlaylistParaPlaylist,
+  SpotifyTrackParaMusica,
+  SpotifyUsuarioParaUsuario
+} from '../Common/mappers';
+import {newArtista} from '../Common/factories';
+import {IMusica} from '../interfaces/IMusica';
 
 @Injectable({
   providedIn: 'root'
@@ -48,15 +53,21 @@ export class SpotifyService {
   }
 
   async getTopArtistas(limit: number = 10): Promise<IArtista[]> {
-    const artistas = await this.api.getMyTopArtists({ limit });
+    const artistas = await this.api.getMyTopArtists({limit});
 
     return artistas.items.map(SpotifyArtistaParaArtista);
   }
 
   async getMusicas(offset: number = 0, limit: number = 20): Promise<IMusica[]> {
-    const musicas = await this.api.getMySavedTracks({ offset, limit });
+    const musicas = await this.api.getMySavedTracks({offset, limit});
 
     return musicas.items.map(item => SpotifyTrackParaMusica(item.track));
+  }
+
+  async obterMusicaAtual(): Promise<IMusica> {
+    const musica = await this.api.getMyCurrentPlayingTrack();
+
+    return SpotifyTrackParaMusica(musica.item);
   }
 
   async executarMusica(musicaId: string): Promise<void> {

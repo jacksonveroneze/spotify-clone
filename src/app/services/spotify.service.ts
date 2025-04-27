@@ -4,7 +4,7 @@ import { IUsuario } from '../interfaces/IUsuario';
 import { IPlaylist } from '../interfaces/IPlaylist';
 import { AuthenticateService } from './spotify-auth.service';
 import { IArtista } from '../interfaces/IArtista';
-import { SpotifyArtistaParaArtista } from '../Common/mappers';
+import { SpotifyArtistaParaArtista, SpotifyPlaylistParaPlaylist, SpotifyUsuarioParaUsuario } from '../Common/mappers';
 import { newArtista } from '../Common/factories';
 
 @Injectable({
@@ -29,23 +29,13 @@ export class SpotifyService {
   async getUsuario(): Promise<IUsuario> {
     const user = await this.api.getMe();
 
-    return {
-      id: user.id,
-      nome: user.display_name,
-      imagemUrl: user.images[0].url
-    };
+    return SpotifyUsuarioParaUsuario(user);
   }
 
   async getPlaylists(): Promise<IPlaylist[]> {
     const playlists = await this.api.getUserPlaylists();
 
-    return playlists.items.map(this.SpotifyPlaylistParaPlaylist);
-  }
-
-  async getTopArtistas(limit: number = 10): Promise<IArtista[]> {
-    const artistas = await this.api.getMyTopArtists({ limit });
-
-    return artistas.items.map(SpotifyArtistaParaArtista);
+    return playlists.items.map(SpotifyPlaylistParaPlaylist);
   }
 
   async getTopArtista(): Promise<IArtista> {
@@ -56,13 +46,9 @@ export class SpotifyService {
       : newArtista()
   }
 
+  async getTopArtistas(limit: number = 10): Promise<IArtista[]> {
+    const artistas = await this.api.getMyTopArtists({ limit });
 
-  SpotifyPlaylistParaPlaylist(
-    playlist: SpotifyApi.PlaylistObjectSimplified): IPlaylist {
-    return {
-      id: playlist.id,
-      nome: playlist.name,
-      imagemUrl: playlist.images.pop().url
-    };
+    return artistas.items.map(SpotifyArtistaParaArtista);
   }
 }

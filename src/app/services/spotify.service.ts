@@ -4,8 +4,9 @@ import { IUsuario } from '../interfaces/IUsuario';
 import { IPlaylist } from '../interfaces/IPlaylist';
 import { AuthenticateService } from './spotify-auth.service';
 import { IArtista } from '../interfaces/IArtista';
-import { SpotifyArtistaParaArtista, SpotifyPlaylistParaPlaylist, SpotifyUsuarioParaUsuario } from '../Common/mappers';
+import { SpotifyArtistaParaArtista, SpotifyPlaylistParaPlaylist, SpotifyTrackParaMusica, SpotifyUsuarioParaUsuario } from '../Common/mappers';
 import { newArtista } from '../Common/factories';
+import { IMusica } from '../interfaces/IMusica';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +40,7 @@ export class SpotifyService {
   }
 
   async getTopArtista(): Promise<IArtista> {
-    var artistas = await this.getTopArtistas(1);
+    const artistas = await this.getTopArtistas(1);
 
     return artistas.length == 1
       ? artistas.pop()
@@ -50,5 +51,16 @@ export class SpotifyService {
     const artistas = await this.api.getMyTopArtists({ limit });
 
     return artistas.items.map(SpotifyArtistaParaArtista);
+  }
+
+  async getMusicas(offset: number = 0, limit: number = 20): Promise<IMusica[]> {
+    const musicas = await this.api.getMySavedTracks({ offset, limit });
+
+    return musicas.items.map(item => SpotifyTrackParaMusica(item.track));
+  }
+
+  async executarMusica(musicaId: string): Promise<void> {
+    await this.api.queue(musicaId);
+    await this.api.skipToNext();
   }
 }

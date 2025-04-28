@@ -6,11 +6,11 @@ import {AuthenticateService} from './spotify-auth.service';
 import {IArtista} from '../interfaces/IArtista';
 import {
   SpotifyArtistaParaArtista,
-  SpotifyPlaylistParaPlaylist,
+  SpotifyPlaylistParaPlaylist, SpotifySinglePlaylistParaPlaylist,
   SpotifyTrackParaMusica,
   SpotifyUsuarioParaUsuario
 } from '../Common/mappers';
-import {newArtista} from '../Common/factories';
+import {newArtista, newPlaylist} from '../Common/factories';
 import {IMusica} from '../interfaces/IMusica';
 
 @Injectable({
@@ -42,6 +42,23 @@ export class SpotifyService {
     const playlists = await this.api.getUserPlaylists();
 
     return playlists.items.map(SpotifyPlaylistParaPlaylist);
+  }
+
+  async getPlaylist(playListId: string, offset: number = 0, limit: number = 50): Promise<IPlaylist> {
+    const playlist = await this.api.getPlaylist(playListId);
+
+    if (!playlist) {
+      return newPlaylist();
+    }
+
+    const playList = SpotifySinglePlaylistParaPlaylist(playlist);
+
+    const musicasSpotify = await this.api.getPlaylistTracks(playListId, {offset, limit});
+
+    playList.musicas = musicasSpotify.items.map(item =>
+      SpotifyTrackParaMusica(item.track as SpotifyApi.TrackObjectFull));
+
+    return playList;
   }
 
   async getTopArtista(): Promise<IArtista> {

@@ -20,7 +20,7 @@
         <div class="playlist-scroll">
             @for(item of playlists; track $index)
             {
-            <app-botao-menu [descricao]="item.nome" [selecionado]="false">
+            <app-botao-menu [descricao]="item.nome" [selecionado]="false" (click)="irParaPlaylist(item)">
                 <fa-icon [icon]="playlistIcone"></fa-icon>
             </app-botao-menu>
             }

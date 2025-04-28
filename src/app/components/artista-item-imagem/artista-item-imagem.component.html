@@ -1,1 +1,7 @@
-<p>artista-item-imagem works!</p>
+<div class="flex container" (click)="onCLick()">
+  <img [src]="imagem" alt=""/>
+
+  <span>
+    <ng-content></ng-content>
+  </span>
+</div>

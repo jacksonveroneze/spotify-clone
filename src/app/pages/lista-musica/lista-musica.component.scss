@@ -1,0 +1,17 @@
+@use 'table' as *;
+
+:host {
+  display: flex;
+  justify-content: space-between;
+
+  .painel-direito {
+    height: 100vh;
+  }
+
+  .lista {
+    width: 100%;
+    padding: 0 50px 20px;
+    max-height: 100%;
+    overflow-y: scroll;
+  }
+}

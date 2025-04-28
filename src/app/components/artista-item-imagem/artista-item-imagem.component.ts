@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-artista-item-imagem',
@@ -8,4 +8,13 @@ import { Component } from '@angular/core';
 })
 export class ArtistaItemImagemComponent {
 
+  @Input()
+  imagem: string = '';
+
+  @Output()
+  clickEvent: EventEmitter<void> = new EventEmitter<void>();
+
+  onCLick(): void {
+    this.clickEvent.emit();
+  }
 }

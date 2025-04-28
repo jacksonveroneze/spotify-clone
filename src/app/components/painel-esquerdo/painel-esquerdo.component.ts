@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { BotaoMenuComponent } from "../botao-menu/botao-menu.component";
-import { faGuitar, faHome, faMusic, faSearch, IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { IPlaylist } from '../../interfaces/IPlaylist';
-import { SpotifyService } from '../../services/spotify.service';
-import { IBotao } from '../../interfaces/IBotao';
-import { Router } from '@angular/router';
-import { RodapeUsuarioComponent } from "../rodape-usuario/rodape-usuario.component";
-import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import {Component, OnInit} from '@angular/core';
+import {BotaoMenuComponent} from "../botao-menu/botao-menu.component";
+import {faGuitar, faHome, faMusic, faSearch, IconDefinition} from '@fortawesome/free-solid-svg-icons';
+import {IPlaylist} from '../../interfaces/IPlaylist';
+import {SpotifyService} from '../../services/spotify.service';
+import {IBotao} from '../../interfaces/IBotao';
+import {Router} from '@angular/router';
+import {RodapeUsuarioComponent} from "../rodape-usuario/rodape-usuario.component";
+import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-painel-esquerdo',
@@ -22,25 +22,29 @@ export class PainelEsquerdoComponent implements OnInit {
   playlistIcone: IconDefinition = faMusic;
 
   constructor(private router: Router,
-    private service: SpotifyService) {
+              private service: SpotifyService) {
+
     this.botoes = [
       {
         id: "id_home",
         descricao: "Home",
         icone: faHome,
-        selecionado: true
+        selecionado: true,
+        actionUrl: 'player/home'
       },
       {
         id: "id_pesquisar",
         descricao: "Pesquisar",
         icone: faGuitar,
-        selecionado: false
+        selecionado: false,
+        actionUrl: 'player/pesquisar'
       },
       {
         id: "id_artistas",
         descricao: "Artistas",
         icone: faSearch,
-        selecionado: false
+        selecionado: false,
+        actionUrl: 'player/top-artistas'
       }
     ];
   }
@@ -49,7 +53,7 @@ export class PainelEsquerdoComponent implements OnInit {
     this.playlists = await this.service.getPlaylists();
   }
 
-  botaoClick(botao: IBotao): void {
+  async botaoClick(botao: IBotao): Promise<void> {
     const length = this.botoes.length;
 
     for (let index = 0; index < length; index++) {
@@ -57,6 +61,10 @@ export class PainelEsquerdoComponent implements OnInit {
         this.botoes[index].id == botao.id;
     }
 
-    this.router.navigateByUrl('player/home');
+    await this.router.navigateByUrl(botao.actionUrl);
+  }
+
+  async irParaPlaylist(item: IPlaylist) {
+    await this.router.navigateByUrl(`player/lista/playlist/${item.id}`);
   }
 }

@@ -1,25 +1,35 @@
-import { IArtista } from "../interfaces/IArtista";
-import { IMusica } from "../interfaces/IMusica";
+import {IArtista} from "../interfaces/IArtista";
+import {IMusica} from "../interfaces/IMusica";
+import {IPlaylist} from '../interfaces/IPlaylist';
 
 export function newArtista(): IArtista {
-    return {
-        id: '',
-        imagemUrl: '',
-        nome: '',
-        musicas: []
-    };
+  return {
+    id: '',
+    imagemUrl: '',
+    nome: '',
+    musicas: []
+  };
 }
 
 export function newMusica(): IMusica {
-    return {
+  return {
+    id: '',
+    album: {
       id: '',
-      album: {
-        id: '',
-        imagemUrl: '',
-        nome: '',
-      },
-      artistas: [],
-      tempo: '',
-      titulo: ''
-    }
+      imagemUrl: '',
+      nome: '',
+    },
+    artistas: [],
+    tempo: '',
+    titulo: ''
   }
+}
+
+export function newPlaylist(): IPlaylist {
+  return {
+    id: '',
+    imagemUrl: '',
+    nome: '',
+    musicas: []
+  }
+}

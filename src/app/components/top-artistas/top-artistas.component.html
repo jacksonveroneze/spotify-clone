@@ -1,1 +1,7 @@
-<p>top-artistas works!</p>
+<span class="titulo-md"> Top 5 Artistas</span>
+
+@for (topArtista of topArtistas; track $index) {
+  <app-artista-item-imagem [imagem]="topArtista.imagemUrl" class="mt-1">
+    {{ topArtista.nome }}
+  </app-artista-item-imagem>
+}

@@ -4,7 +4,7 @@ export const environment = {
   production: false
 };
 
-export const pollingMusicaAtual: number = 5000;
+export const pollingMusicaAtual: number = 15000;
 
 export const spotifyAuthConfig: AuthConfig = {
   loginUrl: 'https://accounts.spotify.com/authorize',

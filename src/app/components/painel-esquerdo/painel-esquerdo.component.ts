@@ -18,13 +18,14 @@ import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 export class PainelEsquerdoComponent implements OnInit {
 
   playlists: IPlaylist[];
-  botoes: IBotao[];
+  botoesAcao: IBotao[];
+  botoesPlaylist: IBotao[];
   playlistIcone: IconDefinition = faMusic;
 
   constructor(private router: Router,
               private service: SpotifyService) {
 
-    this.botoes = [
+    this.botoesAcao = [
       {
         id: "id_home",
         descricao: "Home",
@@ -50,21 +51,44 @@ export class PainelEsquerdoComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.playlists = await this.service.getPlaylists();
+    const playlists = await this.service.getPlaylists();
+
+    this.botoesPlaylist = playlists.map(item => {
+      return {
+        id: item.id,
+        descricao: item.nome,
+        icone: this.playlistIcone,
+        selecionado: false,
+        actionUrl: ''
+      }
+    })
   }
 
-  async botaoClick(botao: IBotao): Promise<void> {
-    const length = this.botoes.length;
+  async botaoClick(item: IBotao): Promise<void> {
+    const length = this.botoesAcao.length;
 
     for (let index = 0; index < length; index++) {
-      this.botoes[index].selecionado =
-        this.botoes[index].id == botao.id;
+      this.botoesAcao[index].selecionado =
+        this.botoesAcao[index].id == item.id;
     }
 
-    await this.router.navigateByUrl(botao.actionUrl);
+    const playListsLength = this.botoesPlaylist.length;
+
+    for (let index = 0; index < playListsLength; index++) {
+      this.botoesPlaylist[index].selecionado = false;
+    }
+
+    await this.router.navigateByUrl(item.actionUrl);
   }
 
-  async irParaPlaylist(item: IPlaylist) {
+  async irParaPlaylist(item: IBotao) {
+    const playListsLength = this.botoesPlaylist.length;
+
+    for (let index = 0; index < playListsLength; index++) {
+      this.botoesPlaylist[index].selecionado =
+        this.botoesPlaylist[index].id == item.id;
+    }
+
     await this.router.navigateByUrl(`player/lista/playlist/${item.id}`);
   }
 }

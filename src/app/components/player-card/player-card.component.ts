@@ -5,6 +5,7 @@ import {newMusica} from '../../Common/factories';
 import {Subscription} from 'rxjs';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 import {faStepBackward, faStepForward, IconDefinition} from '@fortawesome/free-solid-svg-icons';
+import {SpotifyService} from '../../services/spotify.service';
 
 @Component({
   selector: 'app-player-card',
@@ -22,7 +23,8 @@ export class PlayerCardComponent implements OnInit, OnDestroy {
   anteriorIcone: IconDefinition = faStepBackward;
   proximaIcone: IconDefinition = faStepForward;
 
-  constructor(private playerService: PlayerService) {
+  constructor(private playerService: PlayerService,
+              private spotifyService: SpotifyService) {
   }
 
   ngOnInit(): void {
@@ -34,5 +36,17 @@ export class PlayerCardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
+  async voltarMusica(): Promise<void> {
+    await this.spotifyService.musicaAnterior();
+
+    await this.playerService.obterMusicaAtual();
+  }
+
+  async proximaMusica(): Promise<void> {
+    await this.spotifyService.proximaMusica();
+
+    await this.playerService.obterMusicaAtual();
   }
 }

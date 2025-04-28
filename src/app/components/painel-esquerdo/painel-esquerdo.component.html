@@ -4,7 +4,7 @@
     </div>
 
     <div class="menu-container flex opcoes">
-        @for(item of botoes; track $index)
+        @for(item of botoesAcao; track $index)
         {
         <app-botao-menu [descricao]="item.descricao" [selecionado]="item.selecionado" (clickButton)="botaoClick(item)">
             <fa-icon [icon]="item.icone"></fa-icon>
@@ -18,9 +18,9 @@
         </span>
 
         <div class="playlist-scroll">
-            @for(item of playlists; track $index)
+            @for(item of botoesPlaylist; track $index)
             {
-            <app-botao-menu [descricao]="item.nome" [selecionado]="false" (click)="irParaPlaylist(item)">
+            <app-botao-menu [descricao]="item.descricao" [selecionado]="item.selecionado" (click)="irParaPlaylist(item)">
                 <fa-icon [icon]="playlistIcone"></fa-icon>
             </app-botao-menu>
             }

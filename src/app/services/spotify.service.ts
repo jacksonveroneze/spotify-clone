@@ -91,4 +91,12 @@ export class SpotifyService {
     await this.api.queue(musicaId);
     await this.api.skipToNext();
   }
+
+  async musicaAnterior(): Promise<void> {
+    await this.api.skipToPrevious();
+  }
+
+  async proximaMusica(): Promise<void> {
+    await this.api.skipToNext();
+  }
 }

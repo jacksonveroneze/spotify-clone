@@ -69,10 +69,22 @@ export class SpotifyService {
       : newArtista()
   }
 
-  async getTopArtistas(limit: number = 10): Promise<IArtista[]> {
+  async getTopArtistas(limit: number = 10, expandFollowed?: boolean): Promise<IArtista[]> {
     const artistas = await this.api.getMyTopArtists({limit});
 
-    return artistas.items.map(SpotifyArtistaParaArtista);
+    const result = artistas.items.map(SpotifyArtistaParaArtista);
+
+    if (expandFollowed) {
+      const artistasIds = result.map(item => item.id);
+
+      const followeds = await this.api.isFollowingArtists(artistasIds);
+
+      for (let i = 0; i < result.length; i++) {
+        result[i].isFollowed = followeds[i];
+      }
+    }
+
+    return result;
   }
 
   async getMusicas(offset: number = 0, limit: number = 20): Promise<IMusica[]> {

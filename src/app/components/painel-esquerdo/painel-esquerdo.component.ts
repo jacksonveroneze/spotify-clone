@@ -45,7 +45,7 @@ export class PainelEsquerdoComponent implements OnInit {
         descricao: "Artistas",
         icone: faSearch,
         selecionado: false,
-        actionUrl: 'player/top-artistas'
+        actionUrl: 'player/artistas'
       }
     ];
   }

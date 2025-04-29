@@ -1,0 +1,24 @@
+<div class="minhas-musicas">
+    <span class="titulo-bg mt-4">
+        Top artistas
+    </span>
+
+  <table class="table mt-3">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Seguido</th>
+    </tr>
+    </thead>
+    <tbody>
+      @for (artista of artistas; track $index) {
+        <tr>
+          <td>
+            <app-artista-item-imagem [imagem]="artista.imagemUrl">{{ artista.nome }}</app-artista-item-imagem>
+          </td>
+          <td>{{artista.isFollowed ? 'Sim' : 'Não'}}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

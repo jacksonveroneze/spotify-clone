@@ -30,6 +30,7 @@ export const spotifyAuthConfig: AuthConfig = {
     "user-modify-playback-state", // alterar do player do usuario.
     "user-library-read", // ler biblioteca dos usuarios
     "playlist-read-private", // ler playlists privads
-    "playlist-read-collaborative" // ler playlists colaborativas
+    "playlist-read-collaborative", // ler playlists colaborativas
+    "user-follow-read"
   ].join(' ')
 };

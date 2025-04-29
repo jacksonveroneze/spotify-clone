@@ -27,4 +27,24 @@ export class ListaArtistasComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.artistas = await this.spotifyService.getTopArtistas(20, true);
   }
+
+  async follow(artista: IArtista): Promise<void> {
+    await this.spotifyService.followArtist(artista.id);
+
+    this.changeStatusFollow(artista.id, true);
+  }
+
+  async unfollow(artista: IArtista): Promise<void> {
+    await this.spotifyService.unfollowArtist(artista.id);
+
+    this.changeStatusFollow(artista.id, false);
+  }
+
+  changeStatusFollow(artistaId: string, isFollowed: boolean): void {
+    const artista = this.artistas.find(a => a.id === artistaId);
+
+    if (artista) {
+      artista.isFollowed = isFollowed;
+    }
+  }
 }

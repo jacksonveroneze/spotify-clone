@@ -1,3 +1,17 @@
-.d-block {
-  display: block;
+@use 'table' as *;
+@use 'variaveis' as *;
+
+:host {
+  button {
+    border: 0;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: left;
+    font-weight: 600;
+    font-size: .8rem;
+    cursor: pointer;
+    margin-top: 20px;
+
+    color:$cor-primaria;
+  }
 }

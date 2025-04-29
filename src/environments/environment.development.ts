@@ -31,6 +31,7 @@ export const spotifyAuthConfig: AuthConfig = {
     "user-library-read", // ler biblioteca dos usuarios
     "playlist-read-private", // ler playlists privads
     "playlist-read-collaborative", // ler playlists colaborativas
-    "user-follow-read"
+    "user-follow-read",
+    "user-follow-modify"
   ].join(' ')
 };

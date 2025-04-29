@@ -111,4 +111,12 @@ export class SpotifyService {
   async proximaMusica(): Promise<void> {
     await this.api.skipToNext();
   }
+
+  async followArtist(id: string) {
+    return this.api.followArtists([id]);
+  }
+
+  async unfollowArtist(id: string) {
+    return this.api.unfollowArtists([id]);
+  }
 }

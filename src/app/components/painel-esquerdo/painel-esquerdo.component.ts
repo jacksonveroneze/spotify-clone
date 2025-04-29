@@ -31,6 +31,7 @@ export class PainelEsquerdoComponent implements OnInit {
         descricao: "Home",
         icone: faHome,
         selecionado: true,
+        exibir: true,
         actionUrl: 'player/home'
       },
       {
@@ -45,6 +46,7 @@ export class PainelEsquerdoComponent implements OnInit {
         descricao: "Artistas",
         icone: faSearch,
         selecionado: false,
+        exibir: true,
         actionUrl: 'player/artistas'
       }
     ];

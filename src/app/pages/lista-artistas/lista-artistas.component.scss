@@ -26,4 +26,21 @@
     overflow-y: scroll;
   }
 
+  button {
+    border: 0;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: left;
+    font-weight: 600;
+    font-size: .8rem;
+    cursor: pointer;
+
+    color:$cor-primaria;
+
+    &.selecionado {
+      background-color: $cor-primaria;
+      color: $branco;
+    }
+  }
+
 }

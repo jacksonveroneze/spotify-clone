@@ -5,5 +5,6 @@ export interface IBotao {
     descricao: string;
     icone: IconDefinition;
     selecionado: boolean;
+    exibir?: boolean;
     actionUrl: string;
 }

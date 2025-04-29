@@ -16,7 +16,12 @@
           <td>
             <app-artista-item-imagem [imagem]="artista.imagemUrl">{{ artista.nome }}</app-artista-item-imagem>
           </td>
-          <td>{{artista.isFollowed ? 'Sim' : 'Não'}}</td>
+          <td>
+            @if (artista.isFollowed) {
+              <button (click)="unfollow(artista)" class="selecionado">Unfolow</button>
+            } @else {
+              <button (click)="follow(artista)">Follow</button>
+            }
         </tr>
       }
     </tbody>

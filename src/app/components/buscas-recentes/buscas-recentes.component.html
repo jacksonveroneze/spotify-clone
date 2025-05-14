@@ -1,8 +1,10 @@
-<input type="text"
-       [(ngModel)]="campoPesquisa"
-       placeholder="Artistas, Musicas, Playlists"
-       (keyup.enter)="buscar()"/>
-
+<form [formGroup]="form">
+  <input type="text"
+         formControlName="busca"
+         name="busca"
+         placeholder="Artistas, Musicas, Playlists"
+         (keyup.enter)="buscar()"/>
+</form>
 <div class="sugestoes flex">
   @for (pesquisa of pesquisasRecentes; track $index) {
     <span (click)="definirPesquisa(pesquisa)">{{ pesquisa }}</span>

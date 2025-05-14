@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { spotifyAuthConfig } from '../../environments/environment.development';
+import { spotifyAuthConfig } from '../../environments/environment';
 import { OAuthService } from 'angular-oauth2-oidc';
 
 @Injectable({
@@ -17,7 +17,7 @@ export class AuthenticateService {
 
   async handleCallback(): Promise<boolean> {
     await this.oauthService.tryLoginCodeFlow();
-    
+
     return this.oauthService.hasValidAccessToken();
   }
 

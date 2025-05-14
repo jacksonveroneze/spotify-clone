@@ -11,7 +11,7 @@
     </tr>
     </thead>
     <tbody>
-      @for (artista of artistas; track $index) {
+      @for (artista of artistas(); track $index) {
         <tr>
           <td>
             <app-artista-item-imagem [imagem]="artista.imagemUrl">{{ artista.nome }}</app-artista-item-imagem>
@@ -22,6 +22,7 @@
             } @else {
               <button (click)="follow(artista)">Follow</button>
             }
+          </td>
         </tr>
       }
     </tbody>
